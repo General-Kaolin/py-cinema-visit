@@ -10,16 +10,14 @@ def cinema_visit(
     cleaner: str,
     movie: str
 ) -> None:
-
-    customers_list = []
-    for customer in customers:
-        customers_list.append(Customer(customer["name"], customer["food"]))
+    customers_list = [
+        Customer(c["name"], c["food"]) for c in customers
+    ]
 
     cinema_hall = CinemaHall(hall_number)
-
-    cleaner_name = Cleaner(cleaner)
+    cleaner_instance = Cleaner(cleaner)
 
     for customer in customers_list:
         CinemaBar.sell_product(customer.food, customer)
 
-    cinema_hall.movie_session(movie, customers_list, cleaner_name)
+    cinema_hall.movie_session(movie, customers_list, cleaner_instance)
